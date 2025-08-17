@@ -1,16 +1,22 @@
 #![warn(missing_docs)]
 
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+//! Help to extract any data from files
+
+use std::path::Path;
+
+///Check file for extract from them
+pub fn check_file(file_path: &String) -> Result<(), String> {
+    if Path::exists(Path::new(file_path)) {
+        if is_file_archive(&file_path) {
+            Ok(())
+        } else {
+            Err("file is not arhive".to_string())
+        }
+    } else {
+            Err(format!("path is not valid, path: \"{}\"", file_path))
+    }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+fn is_file_archive(_file_path: &String) -> bool {
+    true
 }
