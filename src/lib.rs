@@ -7,13 +7,11 @@ use std::path::Path;
 ///Check file for extract from them
 pub fn check_file(file_path: &String) -> Result<(), String> {
     if Path::exists(Path::new(file_path)) {
-        if is_file_archive(&file_path) {
-            Ok(())
-        } else {
-            Err("file is not arhive".to_string())
-        }
+        let pt = Path::new(file_path);
+        println!("{:#?}", pt.metadata().expect("msg"));
+        Ok(())
     } else {
-            Err(format!("path is not valid, path: \"{}\"", file_path))
+        Err(format!("path is not valid, path: \"{}\"", file_path))
     }
 }
 
