@@ -1,20 +1,22 @@
-#![warn(missing_docs)]
-
 //! Help to extract any data from files
 
-use std::path::Path;
 
-///Check file for extract from them
-pub fn check_file(file_path: &String) -> Result<(), String> {
-    if Path::exists(Path::new(file_path)) {
-        let pt = Path::new(file_path);
-        println!("{:#?}", pt.metadata().expect("msg"));
-        Ok(())
-    } else {
-        Err(format!("path is not valid, path: \"{}\"", file_path))
-    }
+pub struct ExHardDrive{
+    pub hd_size: u32,
 }
 
-fn is_file_archive(_file_path: &String) -> bool {
-    true
+pub trait IExtractor {
+    fn info(&self);
+    fn dump();
+    fn check_data();
+    fn search_delete_data();
+}
+
+impl IExtractor for ExHardDrive {
+    fn info(&self){
+        println!("size = {}",self.hd_size);
+    }
+    fn dump(){}
+    fn check_data(){}
+    fn search_delete_data(){}
 }
